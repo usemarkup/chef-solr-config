@@ -48,9 +48,51 @@ For 'handlers' and 'components' no value is typically required, just a key with 
 Usage
 -----
 
-The following is a sample role.json that can be used with this cookbook
-.
+The following is a sample role.json that can be used with this cookbook. This example is used with Centos (hence the pidfile_path & log_path).
 
+roles/solr.json
 ```json
-
+{
+  "name": "solr",
+  "chef_type": "role",
+  "json_class": "Chef::Role",
+  "description": "Solr server role",
+  "default_attributes":
+  {
+    "solr" : {
+      "pidfile_path" : "/var/run/solr",
+      "log_path" : "/var/log/solr",
+      "home_path" : "/var/solr"
+    },
+    "solr-config" : {
+      "cores" : {
+        "example_core_1": {
+          "name": "example_core_1",
+          "configset": "default"
+        },
+        "example_core_2": {
+          "name": "example_core_2",
+          "configset": "default"
+        }
+      },
+      "configsets": {
+        "default": {
+          "schema": "/var/www/site/config/solr/schema.xml"
+        }
+      },
+      "solrconfig": {
+        "luceneMatchVersion": "LUCENE_35",
+        "components": {
+          "spellcheck": null
+        }
+      }
+    },
+    "java" : {
+      "jdk_version": "7"
+    }
+  },
+  "run_list": [
+    "recipe[solr-config]"
+  ]
+}
 ```
