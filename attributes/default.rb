@@ -12,5 +12,5 @@ default['solr-config']['configsets'] = {}
 default['solr-config']['solrconfig'] = {}
 default['solr-config']['solrconfig']['handlers'] = {}
 default['solr-config']['solrconfig']['components'] = {}
-default['solr-config']['solrconfig']['response_writer'] = {}
-default['solr-config']['solrconfig']['update_processor'] = {}
+default['solr-config']['solrconfig']['response_writers'] = {}
+default['solr-config']['solrconfig']['update_processors'] = {}
