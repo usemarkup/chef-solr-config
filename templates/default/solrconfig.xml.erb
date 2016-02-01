@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+ Licensed to the Apache Software Foundation (ASF) under one or more
+ contributor license agreements.  See the NOTICE file distributed with
+ this work for additional information regarding copyright ownership.
+ The ASF licenses this file to You under the Apache License, Version 2.0
+ (the "License"); you may not use this file except in compliance with
+ the License.  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+
+<!--
+########################################################################
+##########                     ATTENTION                     ###########
+##########                                                   ###########
+##########  This file is created automatically by chef       ###########
+##########  DO NOT make manual changes to this file          ###########
+##########                                                   ###########
+########################################################################
+-->
+ 
+<!--
+     For more details about configurations options that may appear in
+     this file, see http://wiki.apache.org/solr/SolrConfigXml. 
+-->
+<config>
+
+  <luceneMatchVersion><%= @config.has_key?("luceneMatchVersion") ? @config.luceneMatchVersion : '5.3.0' %></luceneMatchVersion>
+
+  <dataDir><%= @config.has_key?("dataDir") ? @config.dataDir : '${solr.data.dir:}' %></dataDir>
+
+  <!-- loads various config options which are not under configuration presently. These are generally
+       advanced options that don't need to be changed -->
+  <%= render "solrconfig/static.erb"%>
+
+  <!-- Classic or Managed Schema Factory (use the REST API for schema management (managed)... or not (classic)) -->
+  <%= render "solrconfig/schemafactory.erb", :variables => {:config => @config} %>
+  
+  <!-- Controls low-level behavior of indexing -->
+  <%= render "solrconfig/indexconfig.erb" %>
+ 
+  <!-- JMX/MBEAN (Monitoring) -->
+  <%= render "solrconfig/jmx.erb" %>
+
+  <!-- UpdateHandler/Logging-->
+  <%= render "solrconfig/updatehandler.erb" %>
+  
+  <!-- Commented Out. Unused -->
+  <%= render "solrconfig/indexreader.erb" %>
+  
+  <!-- Query section - these settings control query time things like caches -->
+  <%= render "solrconfig/query.erb" %>
+
+  <!-- Control how incoming requests are handled, caching response headers -->
+  <%= render "solrconfig/requestdispatcher.erb" %>
+
+  <!-- Docblock explaining role of request handlers -->
+  <%= render "solrconfig/requesthandler/_doc.erb" %>
+
+  <!-- Docblock explaining role of search components -->
+  <%= render "solrconfig/searchcomponent/_doc.erb" %>
+
+  <!--  allows you to define request handler parameters  outside of the handler configuration -->
+  <%= render "solrconfig/initparams.erb" %>
+
+
+  <% if @config.components.has_key?("spellcheck") %>
+  <%= render "solrconfig/searchcomponent/spellcheck.erb" %>
+  <% end -%>
+
+  <%= render "solrconfig/requesthandler/select.erb", :variables => {:config => @config } %>
+
+  <% if @config.handlers.has_key?("query") %>
+  <%= render "solrconfig/requesthandler/query.erb" %>
+  <% end -%>
+  <% if @config.handlers.has_key?("export") %>
+  <%= render "solrconfig/requesthandler/export.erb" %>
+  <% end -%>
+  <% if @config.handlers.has_key?("stream") %>
+  <%= render "solrconfig/requesthandler/stream.erb" %>
+  <% end -%>
+  <% if @config.handlers.has_key?("browse") %>
+  <%= render "solrconfig/requesthandler/browse.erb" %>
+  <% end -%>
+
+  <% if @config.handlers.has_key?("update_extract") %>
+  <%= render "solrconfig/requesthandler/update_extract.erb" %>
+  <% end -%>
+  <% if @config.handlers.has_key?("analysis_field") %>
+  <%= render "solrconfig/requesthandler/analysis_field.erb" %>
+  <% end -%>
+  <% if @config.handlers.has_key?("analysis_document") %>
+  <%= render "solrconfig/requesthandler/analysis_document.erb" %>
+  <% end -%>
+  <% if @config.handlers.has_key?("debug_dump") %>
+  <%= render "solrconfig/requesthandler/debug_dump.erb" %>
+  <% end -%>
+  <% if @config.handlers.has_key?("admin_ping") %>
+  <%= render "solrconfig/requesthandler/admin_ping.erb" %>
+  <% end -%>
+  
+  <% if @config.components.has_key?("suggest") %>
+  <%= render "solrconfig/searchcomponent/suggest.erb" %>
+  <%= render "solrconfig/requesthandler/suggest.erb" %>
+  <% end -%>
+  
+  <% if @config.components.has_key?("term_vector") %>
+  <%= render "solrconfig/searchcomponent/tvcomponent.erb" %>
+  <%= render "solrconfig/requesthandler/tvrh.erb" %>
+  <% end -%>
+   
+  <% if @config.components.has_key?("clustering") %>
+  <%= render "solrconfig/searchcomponent/clustering.erb" %>
+  <%= render "solrconfig/requesthandler/clustering.erb" %>
+  <% end -%>
+
+  <% if @config.components.has_key?("terms") %>
+  <%= render "solrconfig/searchcomponent/terms.erb" %>
+  <%= render "solrconfig/requesthandler/terms.erb" %>
+  <% end -%>
+  
+  <% if @config.components.has_key?("elevate") %>
+  <%= render "solrconfig/searchcomponent/elevator.erb" %>
+  <%= render "solrconfig/requesthandler/elevate.erb" %>
+  <% end -%>
+
+  <% if @config.components.has_key?("highlight") %>
+  <%= render "solrconfig/searchcomponent/highlight.erb" %>
+  <% end -%>
+  
+  <!-- Docblock explaining role of update processor-->
+  <%= render "solrconfig/updateprocessor/_doc.erb" %>
+  <%= render "solrconfig/updateprocessor/dedupe.erb" %>
+  <%= render "solrconfig/updateprocessor/langid.erb" %>
+  <%= render "solrconfig/updateprocessor/script.erb" %>
+  
+  <!-- Docblock explaining role of response writer and default response writers -->
+  <%= render "solrconfig/responsewriter/_doc.erb" %>
+  <% if @config.response_writer.has_key?("json_plain") %>
+  <%= render "solrconfig/responsewriter/json_plain.erb" %>
+  <% end -%>
+  <% if @config.response_writer.has_key?("velocity") %>
+  <%= render "solrconfig/responsewriter/velocity.erb" %>
+  <% end -%>
+  <% if @config.response_writer.has_key?("xslt") %>
+  <%= render "solrconfig/responsewriter/xslt.erb" %>
+  <% end -%>
+ 
+  <!-- Docblock explaining role of query parsers  -->
+  <%= render "solrconfig/queryparser/_doc.erb" %>
+
+  <!-- Docblock explaining role of function parsers  -->
+  <%= render "solrconfig/functionparser/_doc.erb" %>
+
+  <!-- Docblock explaining role of document transformers  -->
+  <%= render "solrconfig/documenttransformer/_doc.erb" %>
+    
+  <!-- Legacy config for the admin interface -->
+  <admin>
+    <defaultQuery>*:*</defaultQuery>
+  </admin>
+
+</config>
