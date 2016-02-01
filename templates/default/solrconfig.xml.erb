@@ -137,6 +137,10 @@
   <%= render "solrconfig/searchcomponent/highlight.erb" %>
   <% end -%>
   
+  <% if @config.components.has_key?("autofilter") %>
+  <%= render "solrconfig/searchcomponent/autofilter.erb" %>
+  <% end -%>
+  
   <!-- Docblock explaining role of update processor-->
   <%= render "solrconfig/updateprocessor/_doc.erb" %>
   <%= render "solrconfig/updateprocessor/dedupe.erb" %>
