@@ -38,12 +38,24 @@
           <str name="spellcheck.maxCollationTries">10</str>
           <str name="spellcheck.maxCollations">5</str>
         <% end -%>
+        
+        <% if @config.components.has_key?("autofilter") %>
+          <!-- NOTE: Not sure if either of these is required -->
+          <str name="echoParams">explicit</str>
+          <str name="df">text</str>
+        <% end -%>
 
      </lst>
     
     <% if @config.components.has_key?("spellcheck") %>
       <arr name="last-components">
         <str>spellcheck</str>
+      </arr>
+    <% end -%>
+
+    <% if @config.components.has_key?("autofilter") %>
+      <arr name="first-components">
+        <str>autofilter</str>
       </arr>
     <% end -%>
     <!-- In addition to defaults, "appends" params can be specified

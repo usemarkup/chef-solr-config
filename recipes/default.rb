@@ -26,21 +26,14 @@ ruby_block 'validate_cores' do
   action :run
 end
 
-# ensure cores folders
-directory 'cores' do
-  path "#{node['solr-config']['home']}/cores"
-  owner "#{node["solr"]["user"]}"
-  group "#{node["solr"]["user"]}"
-  mode '0755'
-  action :create
-end
-
 # install cores
 node["solr-config"]["cores"].each do |key, confighash|
   directory "#{node["solr-config"]["home"]}/cores/#{confighash.name}" do
     owner "#{node["solr"]["user"]}"
     group "#{node["solr"]["user"]}"
     mode '0755'
+    recursive true
+    action :create
   end
   template "#{node["solr-config"]["home"]}/cores/#{confighash.name}/core.properties" do
     source "core.properties.erb"
@@ -102,3 +95,15 @@ node["solr-config"]["configsets"].each do |key, confighash|
   end
 end
 
+# copy in dist/libs
+remote_directory "#{node["solr-config"]["install"]}/dist" do
+  source "dist"
+  files_owner "#{node["solr"]["user"]}"
+  files_group "#{node["solr"]["user"]}"
+  files_mode '0755'
+  owner "#{node["solr"]["user"]}"
+  group "#{node["solr"]["user"]}"
+  mode '0755'
+  recursive true
+  action :create
+end

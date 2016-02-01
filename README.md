@@ -6,6 +6,9 @@ This cookbook allows solr to be configured. The cookbook includes and will insta
 As well as being able to setup and configure cores, this cookbook provides the ability to generate a solrconfig.xml via configuration.
 The solrconfig.xml is based on the 'sample_techproducts_configs' example distributed with solr.
 
+This repository includes a compiled version of the [https://github.com/LucidWorks/query-autofiltering-component](Lucidworks autofiltering component).
+
+
 Attributes
 ----------
 
@@ -38,11 +41,14 @@ For 'handlers' and 'components' no value is typically required, just a key with 
   	- spellcheck: If enabled will add spellchecking to the 'select' handler, and enable the spellcheck component.
   	- suggest: Enables the suggest component
   	- terms: Enables the terms component
-  	- term_vector: Enables the term vector component
-  - response_writer:
-  	- json_plain:
-  	- velocity:
-  	- xslt:
+    - term_vector: Enables the term vector component
+  	- autofilter: Enables [https://github.com/LucidWorks/query-autofiltering-component](Lucidworks autofiltering component).
+  - response_writers:
+    - json_plain:
+    - velocity:
+    - xslt:
+  - update_processors:
+    - langid:
 
 
 Usage

@@ -1,0 +1,6 @@
+  <searchComponent name="autofilter" class="org.apache.solr.handler.component.QueryAutoFilteringComponent" >
+    <str name="synonyms">synonyms.txt</str>
+  </searchComponent>
+  
+  <!-- Needed for Autofiltering in SolrCloud -->
+  <searchComponent name="termsComp" class="org.apache.solr.handler.component.TermsComponent"/>

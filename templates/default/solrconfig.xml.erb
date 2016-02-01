@@ -36,9 +36,11 @@
 
   <dataDir><%= @config.has_key?("dataDir") ? @config.dataDir : '${solr.data.dir:}' %></dataDir>
 
-  <!-- loads various config options which are not under configuration presently. These are generally
-       advanced options that don't need to be changed -->
-  <%= render "solrconfig/static.erb"%>
+  <!-- .jar libraries -->
+  <%= render "solrconfig/lib.erb", :variables => {:config => @config} %>
+
+  <!-- Directory & Code Factory -->
+  <%= render "solrconfig/directorycodecfactory.erb"%>
 
   <!-- Classic or Managed Schema Factory (use the REST API for schema management (managed)... or not (classic)) -->
   <%= render "solrconfig/schemafactory.erb", :variables => {:config => @config} %>
@@ -138,18 +140,20 @@
   <!-- Docblock explaining role of update processor-->
   <%= render "solrconfig/updateprocessor/_doc.erb" %>
   <%= render "solrconfig/updateprocessor/dedupe.erb" %>
+  <% if @config.update_processors.has_key?("langid") %>
   <%= render "solrconfig/updateprocessor/langid.erb" %>
+  <% end -%>
   <%= render "solrconfig/updateprocessor/script.erb" %>
   
   <!-- Docblock explaining role of response writer and default response writers -->
   <%= render "solrconfig/responsewriter/_doc.erb" %>
-  <% if @config.response_writer.has_key?("json_plain") %>
+  <% if @config.response_writers.has_key?("json_plain") %>
   <%= render "solrconfig/responsewriter/json_plain.erb" %>
   <% end -%>
-  <% if @config.response_writer.has_key?("velocity") %>
+  <% if @config.response_writers.has_key?("velocity") %>
   <%= render "solrconfig/responsewriter/velocity.erb" %>
   <% end -%>
-  <% if @config.response_writer.has_key?("xslt") %>
+  <% if @config.response_writers.has_key?("xslt") %>
   <%= render "solrconfig/responsewriter/xslt.erb" %>
   <% end -%>
  
