@@ -12,8 +12,6 @@ Attributes
 - cores
   - name: The name of the core
   - configset: The configset to use for this core (used to share configurations between cores).
-  - schema: The name of the schema file. Not required if using 'configset'
-  - solrconfig: The name of the solrconfig file.
 
 
 For 'handlers' and 'components' no value is typically required, just a key with a null value will enable the handler/component. (See Example Configuration)
