@@ -5,7 +5,7 @@ else
 end
 
 default['solr-config']['home'] = node['solr']['directory']
-default['solr-config']['install'] = node['solr']['install']
+default['solr-config']['install'] = "#{node['solr']['install']}/solr"
 default['solr-config']['cores'] = nil
 default['solr-config']['configsets'] = {}
 
