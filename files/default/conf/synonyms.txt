@@ -1,0 +1,3 @@
+chaise lounge,lounge chair,daybed,day bed
+red,rouge,crimson,scarlet
+couch,sofa

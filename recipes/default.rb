@@ -41,8 +41,7 @@ node["solr-config"]["cores"].each do |key, confighash|
     group "#{node["solr"]["user"]}"
     mode '0755'
     variables({
-     :name => confighash.name,
-     :configset => confighash.configset,
+     :coreconfig => confighash
     })
     action :create
     notifies :restart, resources(:service => "solr"), :delayed
