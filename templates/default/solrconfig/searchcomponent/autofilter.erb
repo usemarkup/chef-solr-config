@@ -1,6 +1,28 @@
-  <searchComponent name="autofilter" class="org.apache.solr.handler.component.QueryAutoFilteringComponent" >
-    <str name="synonyms">synonyms.txt</str>
+  <searchComponent name="autofilter" class="org.apache.solr.handler.component.QueryAutoFilteringComponent">
+  <% if @config.components.autofilter.has_key?("synonyms") %>
+    <str name="synonyms"><%= @config.components.autofilter.synonyms %></str>
+  <% end -%>
+  <% if @config.components.autofilter.has_key?("boostFactor") %>
+    <str name="boostFactor"><%= @config.components.autofilter.boostFactor %></str>
+  <% end -%>
+  <% if @config.components.autofilter.has_key?("fieldDelimiter") %>
+    <str name="fieldDelimiter"><%= @config.components.autofilter.fieldDelimiter %></str>
+  <% end -%>
+  <% if @config.components.autofilter.has_key?("useAndForMultiValuedFields") %>
+    <str name="useAndForMultiValuedFields"><%= @config.components.autofilter.useAndForMultiValuedFields %></str>
+  <% end -%>
+  <% if @config.components.autofilter.has_key?("excludeFields") %>
+	<arr name="excludeFields">
+		<% @config.components.autofilter.excludeFields.each do |value, index| -%>
+    		<str><%= value %></str>
+		<% end %>
+    </arr>
+  <% end -%>
+  <% if @config.components.autofilter.has_key?("verbModifiers") %>
+	<arr name="verbModifiers">
+		<% @config.components.autofilter.verbModifiers.each do |value, index| -%>
+    		<str><%= value %></str>
+		<% end %>
+    </arr>
+  <% end -%>
   </searchComponent>
-  
-  <!-- Needed for Autofiltering in SolrCloud -->
-  <searchComponent name="termsComp" class="org.apache.solr.handler.component.TermsComponent"/>

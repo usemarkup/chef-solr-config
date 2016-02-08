@@ -57,25 +57,30 @@ node["solr-config"]["configsets"].each do |key, confighash|
     mode '0755'
     action :create
   end
-  # write solrconfig.xml
-  template "#{node["solr-config"]["home"]}/configsets/#{key}/conf/solrconfig.xml" do
-    source "solrconfig.xml.erb"
-    owner "#{node["solr"]["user"]}"
-    group "#{node["solr"]["user"]}"
-    mode '0755'
-    variables({
-      :config => node["solr-config"]["solrconfig"]
-    })
-    action :create
-    notifies :restart, resources(:service => "solr"), :delayed
+
+  # if schema defined for configset then symlink to solrconfig.xml
+  if confighash.has_key?("config")
+      link "#{node["solr-config"]["home"]}/configsets/#{key}/conf/solrconfig.xml" do
+        to confighash.config
+      end
+  else
+    # write default solrconfig.xml
+    template "#{node["solr-config"]["home"]}/configsets/#{key}/conf/solrconfig.xml" do
+      source "solrconfig.xml.erb"
+      owner "#{node["solr"]["user"]}"
+      group "#{node["solr"]["user"]}"
+      mode '0755'
+      variables({
+        :config => node["solr-config"]["solrconfig"]
+      })
+      action :create
+      notifies :restart, resources(:service => "solr"), :delayed
+    end
   end
   unless confighash.schema.nil?
-    # if schema is defined for the configset and it is not a relative path then create a symlink
-    if Pathname.new(confighash.schema).absolute?
       link "#{node["solr-config"]["home"]}/configsets/#{key}/conf/schema.xml" do
         to confighash.schema
       end
-    end 
   end 
 end
 
