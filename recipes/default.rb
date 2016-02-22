@@ -15,14 +15,11 @@ end
 # validate cores attribute
 ruby_block 'validate_cores' do
   block do
-    unless node["solr-config"]["cores"].nil?
-      node['solr-config']['cores'].each do |key, confighash|
-        unless [:name, :configset].all? {|s| confighash.key? s}
-            raise "Solr core config hash must contain keys `name` & `configset`"
-        end
+    node['solr-config']['cores'].each do |key, confighash|
+      unless [:name, :configset].all? {|s| confighash.key? s}
+          raise "Solr core config hash must contain keys `name` & `configset`"
       end
     end
-  end
   action :run
 end
 
@@ -74,12 +71,15 @@ node["solr-config"]["configsets"].each do |key, confighash|
         :config => node["solr-config"]["solrconfig"]
       })
       action :create
+      ignore_failure: true
       notifies :restart, resources(:service => "solr"), :delayed
+
     end
   end
   unless confighash.schema.nil?
       link "#{node["solr-config"]["home"]}/configsets/#{key}/conf/schema.xml" do
         to confighash.schema
+        ignore_failure: true
       end
   end 
 end
