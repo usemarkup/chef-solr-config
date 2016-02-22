@@ -71,7 +71,7 @@ node["solr-config"]["configsets"].each do |key, confighash|
         :config => node["solr-config"]["solrconfig"]
       })
       action :create
-      ignore_failure: true
+      ignore_failure true
       notifies :restart, resources(:service => "solr"), :delayed
 
     end
@@ -79,7 +79,7 @@ node["solr-config"]["configsets"].each do |key, confighash|
   unless confighash.schema.nil?
       link "#{node["solr-config"]["home"]}/configsets/#{key}/conf/schema.xml" do
         to confighash.schema
-        ignore_failure: true
+        ignore_failure true
       end
   end 
 end
