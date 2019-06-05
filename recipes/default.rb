@@ -75,7 +75,7 @@ node["solr-config"]["configsets"].each do |key, confighash|
 
     end
   end
-  unless confighash.schema.nil?
+  unless confighash['schema'].nil?
       link "#{node["solr-config"]["home"]}/configsets/#{key}/conf/schema.xml" do
         to confighash['schema']
         ignore_failure true
