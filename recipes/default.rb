@@ -24,14 +24,14 @@ end
 
 # install cores
 node["solr-config"]["cores"].each do |key, confighash|
-  directory "#{node["solr-config"]["home"]}/cores/#{confighash.name}" do
+  directory "#{node["solr-config"]["home"]}/cores/#{confighash['name']}" do
     owner "#{node["solr"]["user"]}"
     group "#{node["solr"]["user"]}"
     mode '0755'
     recursive true
     action :create
   end
-  template "#{node["solr-config"]["home"]}/cores/#{confighash.name}/core.properties" do
+  template "#{node["solr-config"]["home"]}/cores/#{confighash['name']}/core.properties" do
     source "core.properties.erb"
     owner "#{node["solr"]["user"]}"
     group "#{node["solr"]["user"]}"
@@ -57,7 +57,7 @@ node["solr-config"]["configsets"].each do |key, confighash|
   # if schema defined for configset then symlink to solrconfig.xml
   if confighash.has_key?("config")
       link "#{node["solr-config"]["home"]}/configsets/#{key}/conf/solrconfig.xml" do
-        to confighash.config
+        to confighash['config']
       end
   else
     # write default solrconfig.xml
@@ -77,7 +77,7 @@ node["solr-config"]["configsets"].each do |key, confighash|
   end
   unless confighash.schema.nil?
       link "#{node["solr-config"]["home"]}/configsets/#{key}/conf/schema.xml" do
-        to confighash.schema
+        to confighash['schema']
         ignore_failure true
       end
   end 
