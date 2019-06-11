@@ -15,7 +15,7 @@ end
 # validate cores attribute
 ruby_block 'validate_cores' do
   node['solr-config']['cores'].each do |key, confighash|
-    unless [:name, :configset].all? {|s| confighash.key? s}
+    unless ['name', 'configset'].all? {|s| confighash.key? s}
       raise "Solr core config hash must contain keys `name` & `configset`"
     end
   end
