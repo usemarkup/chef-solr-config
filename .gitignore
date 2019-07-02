@@ -8,3 +8,6 @@ bin/*
 
 .kitchen/
 .kitchen.local.yml
+
+vendor/
+Gemfile.lock

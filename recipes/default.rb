@@ -13,14 +13,14 @@ template "#{node['solr-config']['home']}/solr.xml" do
 end
 
 # validate cores attribute
-ruby_block 'validate_cores' do
-  node['solr-config']['cores'].each do |key, confighash|
-    unless ['name', 'configset'].all? {|s| confighash.key? s}
-      raise "Solr core config hash must contain keys `name` & `configset`"
-    end
-  end
-  action :run
-end
+#ruby_block 'validate_cores' do
+#  node['solr-config']['cores'].each do |key, confighash|
+#    unless ['name', 'configset'].all? {|s| confighash.key? s}
+#      raise "Solr core config hash must contain keys `name` & `configset`"
+#    end
+#  end
+#  action :run
+#end
 
 # install cores
 node["solr-config"]["cores"].each do |key, confighash|
@@ -80,7 +80,7 @@ node["solr-config"]["configsets"].each do |key, confighash|
         to confighash['schema']
         ignore_failure true
       end
-  end 
+  end
 end
 
 # copy in configuration files (stopwords.txt etc.)

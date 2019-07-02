@@ -1,0 +1,19 @@
+DEPENDENCIES
+  solr
+    git: https://github.com/usemarkup/chef-solr.git
+    revision: 7856d2032051400e32068818489136c36dccedcf
+    ref: 5.0.2
+  solr-config
+    path: .
+    metadata: true
+
+GRAPH
+  homebrew (5.0.8)
+  java (4.1.0)
+    homebrew (>= 0.0.0)
+    windows (>= 0.0.0)
+  solr (5.0.1)
+    java (>= 0.0.0)
+  solr-config (0.1.1)
+    solr (>= 0.0.0)
+  windows (6.0.0)
