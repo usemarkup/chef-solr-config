@@ -1,8 +1,8 @@
-name=<%= @coreconfig.name %>
+name=<%= @coreconfig['name'] %>
 configSet=<%= @coreconfig.configset %>
 <% if @coreconfig.has_key?("schema") %>
-schema=<%= @coreconfig.schema %>
+schema=<%= @coreconfig['schema'] %>
 <% end %>
 <% if @coreconfig.has_key?("config") %>
-config=<%= @coreconfig.config %>
+config=<%= @coreconfig['config'] %>
 <% end %>
