@@ -40,26 +40,26 @@
  <lib path="../a-jar-that-does-not-exist.jar" /> 
 -->
 
-<% if @config.handlers.has_key?("update_extract") %>
+<% if @config['handlers'].has_key?("update_extract") %>
 <lib dir="${solr.install.dir:../../../..}/contrib/extraction/lib" regex=".*\.jar" />
 <lib dir="${solr.install.dir:../../../..}/dist/" regex="solr-cell-\d.*\.jar" />
 <% end -%>
 
-<% if @config.components.has_key?("clustering") %>
+<% if @config['components'].has_key?("clustering") %>
 <lib dir="${solr.install.dir:../../../..}/contrib/clustering/lib/" regex=".*\.jar" />
 <lib dir="${solr.install.dir:../../../..}/dist/" regex="solr-clustering-\d.*\.jar" />
 <% end -%>
 
-<% if @config.update_processors.has_key?("langid") %>
+<% if @config['update_processors'].has_key?("langid") %>
 <lib dir="${solr.install.dir:../../../..}/contrib/langid/lib/" regex=".*\.jar" />
 <lib dir="${solr.install.dir:../../../..}/dist/" regex="solr-langid-\d.*\.jar" />
 <% end -%>
 
-<% if @config.response_writers.has_key?("velocity") %>
+<% if @config['response_writers'].has_key?("velocity") %>
 <lib dir="${solr.install.dir:../../../..}/contrib/velocity/lib" regex=".*\.jar" />
 <lib dir="${solr.install.dir:../../../..}/dist/" regex="solr-velocity-\d.*\.jar" />
 <% end -%>
 
-<% if @config.components.has_key?("autofilter") %>
+<% if @config['components'].has_key?("autofilter") %>
 <lib dir="${solr.install.dir:../../../..}/dist/" regex="query-autofiltering-component-\d.*\.jar" />
 <% end -%>

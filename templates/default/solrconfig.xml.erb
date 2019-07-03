@@ -32,9 +32,9 @@
 -->
 <config>
 
-  <luceneMatchVersion><%= @config.has_key?("luceneMatchVersion") ? @config.luceneMatchVersion : '5.3.0' %></luceneMatchVersion>
+  <luceneMatchVersion><%= @config.has_key?("luceneMatchVersion") ? @config['luceneMatchVersion'] : '5.3.0' %></luceneMatchVersion>
 
-  <dataDir><%= @config.has_key?("dataDir") ? @config.dataDir : '${solr.data.dir:}' %></dataDir>
+  <dataDir><%= @config.has_key?("dataDir") ? @config['dataDir'] : '${solr.data.dir:}' %></dataDir>
 
   <!-- .jar libraries -->
   <%= render "solrconfig/lib.erb", :variables => {:config => @config} %>
@@ -73,95 +73,95 @@
   <%= render "solrconfig/initparams.erb" %>
 
 
-  <% if @config.components.has_key?("spellcheck") %>
+  <% if @config['components'].has_key?("spellcheck") %>
   <%= render "solrconfig/searchcomponent/spellcheck.erb" %>
   <% end -%>
 
   <%= render "solrconfig/requesthandler/select.erb", :variables => {:config => @config } %>
 
-  <% if @config.handlers.has_key?("query") %>
+  <% if @config['handlers'].has_key?("query") %>
   <%= render "solrconfig/requesthandler/query.erb" %>
   <% end -%>
-  <% if @config.handlers.has_key?("export") %>
+  <% if @config['handlers'].has_key?("export") %>
   <%= render "solrconfig/requesthandler/export.erb" %>
   <% end -%>
-  <% if @config.handlers.has_key?("stream") %>
+  <% if @config['handlers'].has_key?("stream") %>
   <%= render "solrconfig/requesthandler/stream.erb" %>
   <% end -%>
-  <% if @config.handlers.has_key?("browse") %>
+  <% if @config['handlers'].has_key?("browse") %>
   <%= render "solrconfig/requesthandler/browse.erb" %>
   <% end -%>
 
-  <% if @config.handlers.has_key?("update_extract") %>
+  <% if @config['handlers'].has_key?("update_extract") %>
   <%= render "solrconfig/requesthandler/update_extract.erb" %>
   <% end -%>
-  <% if @config.handlers.has_key?("analysis_field") %>
+  <% if @config['handlers'].has_key?("analysis_field") %>
   <%= render "solrconfig/requesthandler/analysis_field.erb" %>
   <% end -%>
-  <% if @config.handlers.has_key?("analysis_document") %>
+  <% if @config['handlers'].has_key?("analysis_document") %>
   <%= render "solrconfig/requesthandler/analysis_document.erb" %>
   <% end -%>
-  <% if @config.handlers.has_key?("debug_dump") %>
+  <% if @config['handlers'].has_key?("debug_dump") %>
   <%= render "solrconfig/requesthandler/debug_dump.erb" %>
   <% end -%>
-  <% if @config.handlers.has_key?("admin_ping") %>
+  <% if @config['handlers'].has_key?("admin_ping") %>
   <%= render "solrconfig/requesthandler/admin_ping.erb" %>
   <% end -%>
   
-  <% if @config.components.has_key?("suggest") %>
+  <% if @config['components'].has_key?("suggest") %>
   <%= render "solrconfig/searchcomponent/suggest.erb" %>
   <%= render "solrconfig/requesthandler/suggest.erb" %>
   <% end -%>
   
-  <% if @config.components.has_key?("term_vector") %>
+  <% if @config['components'].has_key?("term_vector") %>
   <%= render "solrconfig/searchcomponent/tvcomponent.erb" %>
   <%= render "solrconfig/requesthandler/tvrh.erb" %>
   <% end -%>
    
-  <% if @config.components.has_key?("clustering") %>
+  <% if @config['components'].has_key?("clustering") %>
   <%= render "solrconfig/searchcomponent/clustering.erb" %>
   <%= render "solrconfig/requesthandler/clustering.erb" %>
   <% end -%>
 
-  <% if @config.components.has_key?("terms") %>
+  <% if @config['components'].has_key?("terms") %>
   <%= render "solrconfig/searchcomponent/terms.erb" %>
   <%= render "solrconfig/requesthandler/terms.erb" %>
   <% end -%>
   
-  <% if @config.components.has_key?("elevate") %>
+  <% if @config['components'].has_key?("elevate") %>
   <%= render "solrconfig/searchcomponent/elevator.erb" %>
   <%= render "solrconfig/requesthandler/elevate.erb" %>
   <% end -%>
 
-  <% if @config.components.has_key?("highlight") %>
+  <% if @config['components'].has_key?("highlight") %>
   <%= render "solrconfig/searchcomponent/highlight.erb" %>
   <% end -%>
   
-  <% if @config.components.has_key?("autofilter") %>
+  <% if @config['components'].has_key?("autofilter") %>
   <%= render "solrconfig/searchcomponent/autofilter.erb", :variables => {:config => @config } %>
   <% end -%>
 
-  <% if @config.handlers.has_key?("autofilter") %>
+  <% if @config['handlers'].has_key?("autofilter") %>
   <%= render "solrconfig/requesthandler/autofilter.erb" %>
   <% end -%>
   
   <!-- Docblock explaining role of update processor-->
   <%= render "solrconfig/updateprocessor/_doc.erb" %>
   <%= render "solrconfig/updateprocessor/dedupe.erb" %>
-  <% if @config.update_processors.has_key?("langid") %>
+  <% if @config['update_processors'].has_key?("langid") %>
   <%= render "solrconfig/updateprocessor/langid.erb" %>
   <% end -%>
   <%= render "solrconfig/updateprocessor/script.erb" %>
   
   <!-- Docblock explaining role of response writer and default response writers -->
   <%= render "solrconfig/responsewriter/_doc.erb" %>
-  <% if @config.response_writers.has_key?("json_plain") %>
+  <% if @config['response_writers'].has_key?("json_plain") %>
   <%= render "solrconfig/responsewriter/json_plain.erb" %>
   <% end -%>
-  <% if @config.response_writers.has_key?("velocity") %>
+  <% if @config['response_writers'].has_key?("velocity") %>
   <%= render "solrconfig/responsewriter/velocity.erb" %>
   <% end -%>
-  <% if @config.response_writers.has_key?("xslt") %>
+  <% if @config['response_writers'].has_key?("xslt") %>
   <%= render "solrconfig/responsewriter/xslt.erb" %>
   <% end -%>
  

@@ -1,26 +1,26 @@
   <searchComponent name="autofilter" class="org.apache.solr.handler.component.QueryAutoFilteringComponent">
-  <% if @config.components.autofilter.has_key?("synonyms") %>
-    <str name="synonyms"><%= @config.components.autofilter.synonyms %></str>
+  <% if @config['components']['autofilter'].has_key?("synonyms") %>
+    <str name="synonyms"><%= @config['components']['autofilter']['synonyms'] %></str>
   <% end -%>
-  <% if @config.components.autofilter.has_key?("boostFactor") %>
-    <str name="boostFactor"><%= @config.components.autofilter.boostFactor %></str>
+  <% if @config['components']['autofilter'].has_key?("boostFactor") %>
+    <str name="boostFactor"><%= @config['components']['autofilter']['boostFactor'] %></str>
   <% end -%>
-  <% if @config.components.autofilter.has_key?("fieldDelimiter") %>
-    <str name="fieldDelimiter"><%= @config.components.autofilter.fieldDelimiter %></str>
+  <% if @config['components']['autofilter'].has_key?("fieldDelimiter") %>
+    <str name="fieldDelimiter"><%= @config['components']['autofilter']['fieldDelimiter'] %></str>
   <% end -%>
-  <% if @config.components.autofilter.has_key?("useAndForMultiValuedFields") %>
-    <str name="useAndForMultiValuedFields"><%= @config.components.autofilter.useAndForMultiValuedFields %></str>
+  <% if @config['components']['autofilter'].has_key?("useAndForMultiValuedFields") %>
+    <str name="useAndForMultiValuedFields"><%= @config['components']['autofilter']['useAndForMultiValuedFields'] %></str>
   <% end -%>
-  <% if @config.components.autofilter.has_key?("excludeFields") %>
+  <% if @config['components']['autofilter'].has_key?("excludeFields") %>
 	<arr name="excludeFields">
-		<% @config.components.autofilter.excludeFields.each do |value, index| -%>
+		<% @config['components']['autofilter']['excludeFields'].each do |value, index| -%>
     		<str><%= value %></str>
 		<% end %>
     </arr>
   <% end -%>
-  <% if @config.components.autofilter.has_key?("verbModifiers") %>
+  <% if @config['components']['autofilter'].has_key?("verbModifiers") %>
 	<arr name="verbModifiers">
-		<% @config.components.autofilter.verbModifiers.each do |value, index| -%>
+		<% @config['components']['autofilter']['verbModifiers'].each do |value, index| -%>
     		<str><%= value %></str>
 		<% end %>
     </arr>
